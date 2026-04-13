@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход</title>
+    <style>
+        body { font-family: Arial; margin: 50px; }
+        .container { max-width: 400px; margin: auto; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 20px; background: blue; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Вход</h2>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <form method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button type="submit">Вход</button>
+        </form>
+        <p>Нет аккаунта? <a href="/signup">Зарегистрироваться</a></p>
+    </div>
+</body>
+</html>
