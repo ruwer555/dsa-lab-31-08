@@ -23,7 +23,7 @@ class TestGetTriangleType(unittest.TestCase):
     def test_float_sides(self):
         self.assertEqual(get_triangle_type(0.5, 0.6, 0.7), "nonequilateral")
 
-    # ----- НЕГАТИВНЫЕ ТЕСТЫ -----
+    # НЕГАТИВНЫЕ ТЕСТЫ 
     def test_zero_side(self):
         with self.assertRaises(IncorrectTriangleSides):
             get_triangle_type(0, 5, 5)
@@ -47,7 +47,3 @@ class TestGetTriangleType(unittest.TestCase):
     def test_invalid_type_none(self):
         with self.assertRaises(IncorrectTriangleSides):
             get_triangle_type(None, 4, 5)
-
-
-if __name__ == "__main__":
-    unittest.main()
