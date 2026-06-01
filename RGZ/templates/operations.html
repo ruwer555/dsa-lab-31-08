@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Мои операции{% endblock %}
+
+{% block content %}
+    <h2>Операции пользователя</h2>
+    
+    <form method="GET" action="/operations" style="margin-bottom: 20px;">
+        <label>Валюта:</label>
+        <select name="currency">
+            <option value="RUB" {% if currency == 'RUB' %}selected{% endif %}>RUB</option>
+            <option value="USD" {% if currency == 'USD' %}selected{% endif %}>USD</option>
+            <option value="EUR" {% if currency == 'EUR' %}selected{% endif %}>EUR</option>
+        </select>
+        <button type="submit">Показать</button>
+    </form>
+    
+    <h3>Общий доход: {{ total_income }} {{ currency }}</h3>
+    <h3>Общий расход: {{ total_expense }} {{ currency }}</h3>
+    
+    <table>
+        <tr>
+            <th>Дата</th>
+            <th>Сумма ({{ currency }})</th>
+            <th>Тип</th>
+        </tr>
+        {% for op in operations %}
+        <tr>
+            <td>{{ op.date }}</td>
+            <td>{{ op.sum_converted }}</td>
+            <td>{{ op.type_operation }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

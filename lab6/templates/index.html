@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Микросервисы - Главная</title>
+</head>
+<body>
+    <h1>Управление валютами</h1>
+    
+    <h2>Добавить валюту</h2>
+    <input type="text" id="add_name" placeholder="Название">
+    <input type="number" id="add_rate" placeholder="Курс к рублю">
+    <button onclick="addCurrency()">Добавить</button>
+    
+    <h2>Обновить курс</h2>
+    <input type="text" id="update_name" placeholder="Название">
+    <input type="number" id="update_rate" placeholder="Новый курс">
+    <button onclick="updateCurrency()">Обновить</button>
+    
+    <h2>Удалить валюту</h2>
+    <input type="text" id="delete_name" placeholder="Название">
+    <button onclick="deleteCurrency()">Удалить</button>
+    
+    <br><br>
+    <a href="/currencies_page">Посмотреть все валюты</a><br>
+    <a href="/convert_page">Конвертировать валюту</a>
+    
+    <script>
+        async function addCurrency() {
+            let name = document.getElementById('add_name').value;
+            let rate = document.getElementById('add_rate').value;
+            let resp = await fetch('/load', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({currency_name: name, rate: parseFloat(rate)})
+            });
+            alert(await resp.text());
+        }
+        
+        async function updateCurrency() {
+            let name = document.getElementById('update_name').value;
+            let rate = document.getElementById('update_rate').value;
+            let resp = await fetch('/update_currency', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({currency_name: name, rate: parseFloat(rate)})
+            });
+            alert(await resp.text());
+        }
+        
+        async function deleteCurrency() {
+            let name = document.getElementById('delete_name').value;
+            let resp = await fetch('/delete', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({currency_name: name})
+            });
+            alert(await resp.text());
+        }
+    </script>
+</body>
+</html>

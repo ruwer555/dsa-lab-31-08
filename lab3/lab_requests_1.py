@@ -33,30 +33,26 @@ def delete_number():
     print(f"[DELETE] число={random_num}, операция={operation}")
     return jsonify({'result': random_num, 'operation': operation})
 
-def run_server():
-    """Запуск сервера на порту 5000"""
-    app.run(debug=False, use_reloader=False)
-
 def run_client():
     time.sleep(2)
-    # 1. GET запрос
+    # GET запрос
     param = random.randint(1, 10)
-    print(f"1. GET запрос: /number/?param={param}")
+    print(f"GET запрос: /number/?param={param}")
     response_get = requests.get(f'http://127.0.0.1:5000/number/?param={param}')
     data_get = response_get.json()
-    print(f"   Ответ: result={data_get['result']}, operation={data_get['operation']}\n")
+    print(f"Ответ: result={data_get['result']}, operation={data_get['operation']}\n")
     
-    # 2. POST запрос
+    # POST запрос
     json_param = random.randint(1, 10)
     headers = {'Content-Type': 'application/json'}
     data_post_raw = {'jsonParam': json_param}
-    print(f"2. POST запрос: /number/ с телом {data_post_raw}")
+    print(f"POST запрос: /number/ с телом {data_post_raw}")
     response_post = requests.post('http://127.0.0.1:5000/number/', headers=headers, json=data_post_raw)
     data_post = response_post.json()
     print(f"   Ответ: result={data_post['result']}, operation={data_post['operation']}\n")
     
-    # 3. DELETE запрос
-    print("3. DELETE запрос: /number/")
+    # DELETE запрос
+    print("DELETE запрос: /number/")
     response_delete = requests.delete('http://127.0.0.1:5000/number/')
     data_delete = response_delete.json()
     print(f"   Ответ: result={data_delete['result']}, operation={data_delete['operation']}\n")

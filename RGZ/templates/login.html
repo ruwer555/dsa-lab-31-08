@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<h2>Вход</h2>
+
+<form id="loginForm">
+    <label>Логин:</label>
+    <input type="text" id="login" name="login" required><br><br>
+    <label>Пароль:</label>
+    <input type="password" id="password" name="password" required><br><br>
+    <button type="submit">Войти</button>
+</form>
+
+<p><a href="{{ url_for('register_page') }}">Нет аккаунта? Зарегистрироваться</a></p>
+
+<script>
+    // Не обновляем страницу
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Сохраняем данные в переменные 
+        const login = document.getElementById('login').value;
+        const password = document.getElementById('password').value;
+        
+        try {
+            
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({login: login, password: password})
+            });
+            // Если ответ 200 переходим на страницу /operations
+            if (response.ok) {
+                window.location.href = '/operations';
+            } else {
+                const error = await response.json();
+                alert('Ошибка: ' + (error.error || 'неверный логин или пароль'));
+            }
+        } catch(err) {
+            alert('Ошибка соединения');
+        }
+    });
+</script>
+{% endblock %}

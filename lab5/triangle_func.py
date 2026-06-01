@@ -3,12 +3,11 @@ class IncorrectTriangleSides(Exception):
 
 def get_triangle_type(a, b, c):
     """
-    Возвращает тип треугольника:
+    Тип треугольника:
     - 'equilateral' (равносторонний)
     - 'isosceles' (равнобедренный)
     - 'nonequilateral' (разносторонний)
 
-    Если стороны некорректны, выбрасывает IncorrectTriangleSides.
     """
     # Проверка типов 
     if not all(isinstance(side, (int, float)) for side in (a, b, c)):

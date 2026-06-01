@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список валют</title>
+</head>
+<body>
+    <h1>Все валюты</h1>
+    <table border="1">
+        <tr><th>Валюта</th><th>Курс к рублю</th></tr>
+        {% for c in currencies %}
+        <tr>
+            <td>{{ c.currency_name }}</td>
+            <td>{{ c.rate }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">На главную</a>
+</body>
+</html>
